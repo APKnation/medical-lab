@@ -10,6 +10,8 @@ export class LabTestService {
       name: 'Complete Blood Count',
       category: 'Hematology',
       turnaroundTime: '2 hours',
+      sampleType: 'Whole Blood (EDTA)',
+      description: 'Comprehensive automated 5-part differential analysis of red cells, white cells, hemoglobin, and platelets.',
       parameters: [
         { name: 'Hemoglobin', unit: 'g/dL', normalRange: '13.5 – 17.5', normalRangeMale: '13.5 – 17.5', normalRangeFemale: '12.0 – 15.5', type: 'numeric' },
         { name: 'WBC', unit: 'x10³/μL', normalRange: '4.5 – 11.0', type: 'numeric' },
@@ -31,6 +33,8 @@ export class LabTestService {
       name: 'Blood Glucose (Fasting)',
       category: 'Clinical Chemistry',
       turnaroundTime: '1 hour',
+      sampleType: 'Sodium Fluoride Plasma',
+      description: 'Fasting blood sugar assay for screening and monitoring of diabetes mellitus following 8-12 hours fast.',
       parameters: [
         { name: 'Fasting Blood Glucose', unit: 'mg/dL', normalRange: '70 – 100', type: 'numeric' },
       ],
@@ -40,6 +44,8 @@ export class LabTestService {
       name: 'Blood Glucose (Random)',
       category: 'Clinical Chemistry',
       turnaroundTime: '1 hour',
+      sampleType: 'Serum / Plasma',
+      description: 'Immediate quantitative measurement of plasma glucose levels regardless of meal timing.',
       parameters: [
         { name: 'Random Blood Glucose', unit: 'mg/dL', normalRange: '< 140', type: 'numeric' },
       ],
@@ -49,6 +55,8 @@ export class LabTestService {
       name: 'Lipid Profile',
       category: 'Clinical Chemistry',
       turnaroundTime: '2 hours',
+      sampleType: 'Serum (Fasting 12h)',
+      description: 'Quantitative measurement of total cholesterol, HDL, LDL, and triglycerides for cardiovascular risk assessment.',
       parameters: [
         { name: 'Total Cholesterol', unit: 'mg/dL', normalRange: '< 200', type: 'numeric' },
         { name: 'LDL Cholesterol', unit: 'mg/dL', normalRange: '< 130', type: 'numeric' },
@@ -62,6 +70,8 @@ export class LabTestService {
       name: 'Liver Function Tests',
       category: 'Clinical Chemistry',
       turnaroundTime: '3 hours',
+      sampleType: 'Serum',
+      description: 'Panel evaluating hepatic enzymes (ALT, AST, ALP), bilirubin fractionations, total protein, and albumin.',
       parameters: [
         { name: 'ALT (SGPT)', unit: 'U/L', normalRange: '7 – 56', type: 'numeric' },
         { name: 'AST (SGOT)', unit: 'U/L', normalRange: '10 – 40', type: 'numeric' },
@@ -79,6 +89,8 @@ export class LabTestService {
       name: 'Kidney Function Tests',
       category: 'Clinical Chemistry',
       turnaroundTime: '3 hours',
+      sampleType: 'Serum',
+      description: 'Evaluation of renal function including serum creatinine, blood urea nitrogen, electrolytes, and calculated eGFR.',
       parameters: [
         { name: 'Creatinine', unit: 'mg/dL', normalRange: '0.7 – 1.3', normalRangeMale: '0.7 – 1.3', normalRangeFemale: '0.6 – 1.1', type: 'numeric' },
         { name: 'Blood Urea Nitrogen (BUN)', unit: 'mg/dL', normalRange: '7 – 20', type: 'numeric' },
@@ -94,6 +106,8 @@ export class LabTestService {
       name: 'Thyroid Function Tests',
       category: 'Endocrinology',
       turnaroundTime: '4 hours',
+      sampleType: 'Serum',
+      description: 'Quantitative immunoassay measurement of TSH, free T4, and free T3 for thyroid metabolic assessment.',
       parameters: [
         { name: 'TSH', unit: 'mIU/L', normalRange: '0.4 – 4.0', type: 'numeric' },
         { name: 'Free T4 (fT4)', unit: 'ng/dL', normalRange: '0.8 – 1.8', type: 'numeric' },
@@ -105,6 +119,8 @@ export class LabTestService {
       name: 'Urinalysis',
       category: 'Urinalysis',
       turnaroundTime: '1 hour',
+      sampleType: 'Midstream Urine',
+      description: 'Complete physical, chemical strip, and microscopic sediment evaluation of urine.',
       parameters: [
         { name: 'Color', unit: '', normalRange: 'Yellow', type: 'text' },
         { name: 'Clarity', unit: '', normalRange: 'Clear', type: 'text' },
@@ -126,6 +142,8 @@ export class LabTestService {
       name: 'Malaria RDT',
       category: 'Parasitology',
       turnaroundTime: '30 minutes',
+      sampleType: 'Whole Blood',
+      description: 'Rapid immunochromatographic antigen detection for Plasmodium falciparum and Plasmodium vivax species.',
       parameters: [
         { name: 'P. falciparum Antigen', unit: '', normalRange: 'Non-Reactive', type: 'qualitative' },
         { name: 'P. vivax Antigen', unit: '', normalRange: 'Non-Reactive', type: 'qualitative' },
@@ -136,6 +154,8 @@ export class LabTestService {
       name: 'Widal Test',
       category: 'Serology',
       turnaroundTime: '2 hours',
+      sampleType: 'Serum',
+      description: 'Agglutination slide and tube test for detection of Salmonella enterica serotype antibodies.',
       parameters: [
         { name: 'S. typhi O', unit: 'titre', normalRange: '< 1:80', type: 'text' },
         { name: 'S. typhi H', unit: 'titre', normalRange: '< 1:80', type: 'text' },
@@ -148,6 +168,8 @@ export class LabTestService {
       name: 'HIV 1&2 Screening',
       category: 'Serology',
       turnaroundTime: '1 hour',
+      sampleType: 'Whole Blood / Serum',
+      description: 'Qualitative rapid screening for antibodies to Human Immunodeficiency Virus types 1 and 2.',
       parameters: [
         { name: 'HIV 1/2 Antibody', unit: '', normalRange: 'Non-Reactive', type: 'qualitative' },
       ],
@@ -157,6 +179,8 @@ export class LabTestService {
       name: 'Hepatitis B Surface Antigen',
       category: 'Serology',
       turnaroundTime: '1 hour',
+      sampleType: 'Serum',
+      description: 'Qualitative immunoassay for Hepatitis B virus surface antigen detection.',
       parameters: [
         { name: 'HBsAg', unit: '', normalRange: 'Non-Reactive', type: 'qualitative' },
       ],
@@ -166,6 +190,8 @@ export class LabTestService {
       name: 'Hepatitis C Antibody',
       category: 'Serology',
       turnaroundTime: '1 hour',
+      sampleType: 'Serum',
+      description: 'Qualitative immunoassay screening for antibodies to Hepatitis C virus.',
       parameters: [
         { name: 'HCV Antibody', unit: '', normalRange: 'Non-Reactive', type: 'qualitative' },
       ],

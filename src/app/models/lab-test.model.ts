@@ -3,6 +3,8 @@ export interface LabTest {
   name: string;
   category: string;
   turnaroundTime: string;
+  sampleType?: string;
+  description?: string;
   parameters: LabTestParameter[];
 }
 

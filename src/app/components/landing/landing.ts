@@ -44,7 +44,7 @@ export class LandingComponent {
         t.name.toLowerCase().includes(q) ||
         t.code.toLowerCase().includes(q) ||
         t.category.toLowerCase().includes(q) ||
-        t.description.toLowerCase().includes(q);
+        (t.description ? t.description.toLowerCase().includes(q) : false);
       return matchCat && matchQuery;
     });
   }
@@ -61,7 +61,6 @@ export class LandingComponent {
     this.selectedTestModal.set(null);
   }
 
-  // FAQ Accordion state
   activeFaq = signal<number | null>(0);
 
   toggleFaq(index: number): void {
