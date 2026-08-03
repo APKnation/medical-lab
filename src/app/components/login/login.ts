@@ -15,6 +15,7 @@ export class LoginComponent {
   showPassword = signal(false);
   loading = signal(false);
   error = signal('');
+  currentYear = new Date().getFullYear();
 
   private auth = inject(AuthService);
   private router = inject(Router);
