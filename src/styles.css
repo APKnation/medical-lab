@@ -1,3 +1,413 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
 
-@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* =============================================
+   BASE
+   ============================================= */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #0f172a;
+  color: #f1f5f9;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* =============================================
+   DESIGN SYSTEM COMPONENTS
+   ============================================= */
+
+/* Cards */
+.card {
+  @apply bg-slate-800/60 border border-slate-700/50 rounded-2xl p-5 backdrop-blur-sm;
+}
+
+.stat-card {
+  @apply bg-slate-800/60 border border-slate-700/50 rounded-2xl p-5 backdrop-blur-sm hover:border-slate-600/60 transition-all duration-200;
+}
+
+/* Badges */
+.badge {
+  @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold;
+}
+
+.badge-pending {
+  @apply bg-amber-500/15 text-amber-400 border border-amber-500/30;
+}
+
+.badge-progress {
+  @apply bg-blue-500/15 text-blue-400 border border-blue-500/30;
+}
+
+.badge-completed {
+  @apply bg-emerald-500/15 text-emerald-400 border border-emerald-500/30;
+}
+
+/* Form Elements */
+.form-label {
+  @apply block text-sm font-medium text-slate-300 mb-2;
+}
+
+.form-input {
+  @apply w-full bg-slate-800/70 border border-slate-600/50 rounded-xl px-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/30 transition-all duration-200 text-sm;
+}
+
+select.form-input option {
+  background-color: #1e293b;
+  color: #f1f5f9;
+}
+
+/* =============================================
+   LAB REPORT STYLES (Screen + Print)
+   ============================================= */
+
+.report-container {
+  font-family: 'Times New Roman', 'Georgia', serif;
+  color: #1a202c;
+  background: white;
+  line-height: 1.5;
+}
+
+.report-header {
+  background: linear-gradient(135deg, #0f766e 0%, #0891b2 100%);
+  color: white;
+  padding: 0;
+}
+
+.report-header-inner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 24px 32px 20px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.lab-logo {
+  width: 60px;
+  height: 60px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 2px solid rgba(255,255,255,0.2);
+}
+
+.report-lab-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin: 0 0 4px;
+  line-height: 1;
+}
+
+.report-lab-tagline {
+  font-size: 12px;
+  opacity: 0.85;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.report-contact {
+  text-align: right;
+  font-size: 11.5px;
+  line-height: 1.8;
+  opacity: 0.9;
+  font-family: 'Inter', sans-serif;
+}
+
+.report-header-divider {
+  background: rgba(0,0,0,0.15);
+  text-align: center;
+  padding: 8px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+}
+
+.report-header-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Patient Info */
+.report-patient-info {
+  padding: 20px 32px;
+  border-bottom: 2px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.report-patient-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 24px;
+}
+
+.report-info-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  border-bottom: 1px dotted #e2e8f0;
+  padding-bottom: 4px;
+}
+
+.report-info-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #64748b;
+  font-weight: 600;
+  min-width: 110px;
+  flex-shrink: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.report-info-value {
+  font-size: 13px;
+  color: #1a202c;
+}
+
+/* Report Body */
+.report-body {
+  padding: 24px 32px 32px;
+}
+
+/* Test Section */
+.report-test-section {
+  margin-bottom: 28px;
+  break-inside: avoid;
+}
+
+.report-test-header {
+  background: linear-gradient(to right, #0f766e15, transparent);
+  border-left: 4px solid #0f766e;
+  padding: 10px 16px;
+  margin-bottom: 0;
+  border-radius: 0 6px 0 0;
+}
+
+.report-test-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f766e;
+  margin: 0 0 2px;
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.report-test-category {
+  font-size: 11px;
+  color: #64748b;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.report-abnormal-badge {
+  font-size: 11px;
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Results Table */
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+
+.report-th {
+  background: #1e293b;
+  color: #e2e8f0;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 8px 12px;
+  text-align: left;
+  font-family: 'Inter', sans-serif;
+}
+
+.report-td {
+  padding: 7px 12px;
+  color: #334155;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.report-tr:nth-child(even) .report-td {
+  background: #f8fafc;
+}
+
+.report-tr-abnormal .report-td {
+  background: #fff7ed !important;
+}
+
+/* Flag Colors */
+.flag-high { color: #dc2626 !important; }
+.flag-low  { color: #2563eb !important; }
+.flag-abnormal { color: #d97706 !important; }
+
+/* Test Footer */
+.report-test-footer {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-top: none;
+  padding: 5px 12px;
+  font-size: 11px;
+  color: #64748b;
+  font-family: 'Inter', sans-serif;
+  border-radius: 0 0 4px 4px;
+}
+
+/* Legend */
+.report-legend {
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 10px 16px;
+  margin-bottom: 24px;
+  background: #f8fafc;
+  font-family: 'Inter', sans-serif;
+}
+
+.report-legend-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #64748b;
+  letter-spacing: 0.5px;
+  margin: 0 0 6px;
+}
+
+.report-legend-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  font-size: 11.5px;
+  color: #475569;
+}
+
+/* Signature */
+.report-signature-section {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 24px;
+  align-items: end;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 2px solid #e2e8f0;
+}
+
+.report-sig-box {
+  text-align: center;
+}
+
+.report-sig-line {
+  border-top: 1.5px solid #334155;
+  margin-bottom: 6px;
+  margin-top: 48px;
+}
+
+.report-sig-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.report-sig-title {
+  font-size: 11px;
+  color: #64748b;
+  margin: 2px 0 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.report-sig-middle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.report-sig-stamp {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 3px solid #0f766e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.report-sig-stamp::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  border: 1px dashed #0f766e;
+}
+
+.report-stamp-inner { text-align: center; }
+
+/* Disclaimer */
+.report-disclaimer {
+  margin-top: 24px;
+  padding: 12px 16px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 10.5px;
+  color: #64748b;
+  line-height: 1.6;
+  font-family: 'Inter', sans-serif;
+  font-style: italic;
+}
+
+/* =============================================
+   PRINT STYLES
+   ============================================= */
+@media print {
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+  html, body {
+    background: white !important;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .no-print { display: none !important; }
+  .no-print-bg { box-shadow: none !important; border-radius: 0 !important; }
+
+  .report-container {
+    max-width: 100% !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  .report-header {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .report-table { page-break-inside: auto; }
+  .report-test-section { page-break-inside: avoid; }
+  .report-signature-section { page-break-inside: avoid; }
+
+  @page {
+    margin: 15mm 12mm;
+    size: A4;
+  }
+}
