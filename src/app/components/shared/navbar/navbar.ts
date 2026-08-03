@@ -19,6 +19,7 @@ export class NavbarComponent {
     { label: 'Dashboard', route: '/dashboard', icon: 'grid' },
     { label: 'Patients', route: '/patients', icon: 'users' },
     { label: 'Add Patient', route: '/patients/new', icon: 'plus-circle' },
+    { label: 'Public Site', route: '/', icon: 'globe' },
   ];
 
   logout() {

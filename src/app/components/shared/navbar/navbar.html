@@ -1,84 +1,78 @@
-<aside class="fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 border-r border-slate-700/50 flex flex-col no-print">
-  <!-- Logo -->
-  <div class="flex items-center gap-3 px-6 py-5 border-b border-slate-700/50">
-    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-400 to-cyan-600 flex items-center justify-center shadow-lg shadow-teal-500/20">
-      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-      </svg>
+<aside class="fixed inset-y-0 left-0 z-50 w-64 bg-[#181818] border-r border-[#303030] flex flex-col no-print">
+  <!-- Brand Header -->
+  <div class="flex items-center gap-3 px-6 py-5 border-b border-[#303030]">
+    <div class="w-9 h-9 bg-[#da291c] flex items-center justify-center font-black text-white text-sm tracking-tighter">
+      LC
     </div>
     <div>
-      <p class="text-white font-bold text-sm leading-tight">LifeCare</p>
-      <p class="text-teal-400 text-xs font-medium">Medical Laboratory</p>
+      <p class="text-white font-bold text-sm uppercase tracking-tight leading-none">LifeCare</p>
+      <p class="text-[#da291c] text-[10px] font-semibold uppercase tracking-[1.1px] mt-0.5">Medical Lab</p>
     </div>
   </div>
 
-  <!-- Navigation -->
-  <nav class="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
-    <p class="text-slate-500 text-xs font-semibold uppercase tracking-widest px-3 mb-3">Main Menu</p>
+  <!-- Navigation Menu -->
+  <nav class="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto">
+    <p class="text-[#969696] text-[11px] font-bold uppercase tracking-[1.1px] px-3 mb-3">Staff Navigation</p>
 
-    <a routerLink="/dashboard" routerLinkActive="bg-teal-500/10 text-teal-400 border-teal-500/30"
+    <a routerLink="/dashboard" routerLinkActive="bg-[#da291c] text-white"
       [routerLinkActiveOptions]="{exact:true}"
-      class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 border border-transparent transition-all duration-200 group">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      class="flex items-center gap-3 px-3.5 py-3 text-[#969696] hover:text-white hover:bg-[#303030] text-xs font-bold uppercase tracking-[1.1px] transition-all">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
           d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
       </svg>
-      <span class="text-sm font-medium">Dashboard</span>
+      <span>Dashboard</span>
     </a>
 
-    <a routerLink="/patients" routerLinkActive="bg-teal-500/10 text-teal-400 border-teal-500/30"
+    <a routerLink="/patients" routerLinkActive="bg-[#da291c] text-white"
       [routerLinkActiveOptions]="{exact:true}"
-      class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 border border-transparent transition-all duration-200">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      class="flex items-center gap-3 px-3.5 py-3 text-[#969696] hover:text-white hover:bg-[#303030] text-xs font-bold uppercase tracking-[1.1px] transition-all">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
           d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
       </svg>
-      <span class="text-sm font-medium">All Patients</span>
+      <span>All Patients</span>
     </a>
 
-    <a routerLink="/patients/new" routerLinkActive="bg-teal-500/10 text-teal-400 border-teal-500/30"
-      class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 border border-transparent transition-all duration-200">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <a routerLink="/patients/new" routerLinkActive="bg-[#da291c] text-white"
+      class="flex items-center gap-3 px-3.5 py-3 text-[#969696] hover:text-white hover:bg-[#303030] text-xs font-bold uppercase tracking-[1.1px] transition-all">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
           d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
-      <span class="text-sm font-medium">New Patient</span>
+      <span>New Patient</span>
+    </a>
+
+    <a routerLink="/"
+      class="flex items-center gap-3 px-3.5 py-3 text-[#969696] hover:text-white hover:bg-[#303030] text-xs font-bold uppercase tracking-[1.1px] transition-all">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+      </svg>
+      <span>Public Site</span>
     </a>
 
     @if (isAdmin()) {
-    <div class="pt-4">
-      <p class="text-slate-500 text-xs font-semibold uppercase tracking-widest px-3 mb-3">Admin</p>
-      <div class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 cursor-default">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-        </svg>
-        <span class="text-sm font-medium text-teal-400">Admin Mode Active</span>
+    <div class="pt-6">
+      <p class="text-[#969696] text-[11px] font-bold uppercase tracking-[1.1px] px-3 mb-2">Authority</p>
+      <div class="flex items-center gap-2 px-3.5 py-2.5 bg-[#303030] text-[#da291c] text-xs font-bold uppercase tracking-[1.1px]">
+        <span class="w-2 h-2 bg-[#da291c]"></span>
+        <span>Admin Mode</span>
       </div>
     </div>
     }
   </nav>
 
-  <!-- Staff Info -->
+  <!-- Staff Info Footer -->
   @if (staff()) {
-  <div class="px-4 py-4 border-t border-slate-700/50">
-    <div class="flex items-center gap-3 px-3 py-3 rounded-xl bg-slate-800">
-      <div class="w-9 h-9 rounded-full bg-gradient-to-br from-teal-400 to-cyan-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
-        {{ staff()!.name[0] }}
-      </div>
-      <div class="flex-1 min-w-0">
-        <p class="text-white text-sm font-medium truncate">{{ staff()!.name }}</p>
-        <p class="text-slate-400 text-xs truncate">{{ staff()!.role }}</p>
-      </div>
+  <div class="px-4 py-4 border-t border-[#303030]">
+    <div class="p-3 bg-[#303030] mb-2">
+      <p class="text-white text-xs font-bold uppercase truncate">{{ staff()!.name }}</p>
+      <p class="text-[#969696] text-[11px] uppercase tracking-wider truncate">{{ staff()!.role }}</p>
     </div>
     <button (click)="logout()"
-      class="mt-2 w-full flex items-center gap-2 px-3 py-2.5 rounded-xl text-slate-400 hover:text-red-400 hover:bg-red-500/10 transition-all duration-200">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-      </svg>
-      <span class="text-sm font-medium">Sign Out</span>
+      class="w-full flex items-center justify-center gap-2 px-3 py-2.5 bg-transparent border border-[#404040] hover:border-[#da291c] text-[#969696] hover:text-[#da291c] text-xs font-bold uppercase tracking-[1.1px] transition-all">
+      <span>Sign Out</span>
     </button>
   </div>
   }

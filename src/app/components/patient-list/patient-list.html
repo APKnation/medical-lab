@@ -1,42 +1,44 @@
-<div class="space-y-6">
+<div class="space-y-8">
   <!-- Header -->
-  <div class="flex items-center justify-between flex-wrap gap-3">
+  <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#303030] pb-6">
     <div>
-      <h1 class="text-2xl font-bold text-white">Patient Records</h1>
-      <p class="text-slate-400 text-sm mt-1">{{ filtered().length }} patient{{ filtered().length !== 1 ? 's' : '' }} found</p>
+      <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#303030] text-[#da291c] text-xs font-bold uppercase tracking-[1.1px] mb-2">
+        <span class="w-2 h-2 bg-[#da291c]"></span>
+        Patient Registry
+      </div>
+      <h1 class="text-3xl font-bold text-white uppercase tracking-tight">Diagnostic Patients</h1>
+      <p class="text-[#969696] text-xs mt-1">Manage patient registrations, test orders, and report generation.</p>
     </div>
-    <a routerLink="/patients/new"
-      class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-600 text-white text-sm font-semibold shadow-lg shadow-teal-500/20 hover:from-teal-400 hover:to-cyan-500 transition-all duration-200 active:scale-95">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-      </svg>
-      New Patient
+    <a routerLink="/patients/new" class="btn-ferrari-primary text-xs">
+      + Add Patient
     </a>
   </div>
 
-  <!-- Filters -->
-  <div class="card">
-    <div class="flex flex-col sm:flex-row gap-3">
-      <div class="relative flex-1">
-        <div class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
-        </div>
-        <input type="text" placeholder="Search by name, ID, doctor..." (input)="onSearch($event)"
-          class="w-full bg-slate-800/70 border border-slate-600/50 rounded-xl pl-10 pr-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-teal-500 transition-all text-sm" />
-      </div>
+  <!-- Search & Filter Controls -->
+  <div class="card-ferrari grid grid-cols-1 md:grid-cols-4 gap-4">
+    <!-- Search Input -->
+    <div class="md:col-span-2">
+      <label class="block text-[11px] font-bold uppercase tracking-[1.1px] text-[#969696] mb-2">Search Records</label>
+      <input type="text" [value]="searchQuery()" (input)="onSearch($event)"
+        placeholder="Search patient name, Lab ID, doctor, contact..."
+        class="form-input-ferrari" />
+    </div>
 
-      <select (change)="statusFilter.set($any($event.target).value)"
-        class="bg-slate-800/70 border border-slate-600/50 rounded-xl px-4 py-2.5 text-slate-300 focus:outline-none focus:border-teal-500 transition-all text-sm">
+    <!-- Status Filter -->
+    <div>
+      <label class="block text-[11px] font-bold uppercase tracking-[1.1px] text-[#969696] mb-2">Status Filter</label>
+      <select [(ngModel)]="statusFilter" class="form-input-ferrari">
         <option value="All">All Statuses</option>
         <option value="Pending">Pending</option>
         <option value="In Progress">In Progress</option>
         <option value="Completed">Completed</option>
       </select>
+    </div>
 
-      <select (change)="priorityFilter.set($any($event.target).value)"
-        class="bg-slate-800/70 border border-slate-600/50 rounded-xl px-4 py-2.5 text-slate-300 focus:outline-none focus:border-teal-500 transition-all text-sm">
+    <!-- Priority Filter -->
+    <div>
+      <label class="block text-[11px] font-bold uppercase tracking-[1.1px] text-[#969696] mb-2">Priority</label>
+      <select [(ngModel)]="priorityFilter" class="form-input-ferrari">
         <option value="All">All Priorities</option>
         <option value="Normal">Normal</option>
         <option value="Urgent">Urgent</option>
@@ -44,103 +46,70 @@
     </div>
   </div>
 
-  <!-- Table -->
-  <div class="card overflow-hidden">
+  <!-- Patient Table -->
+  <div class="card-ferrari space-y-4">
     @if (filtered().length === 0) {
-    <div class="text-center py-16">
-      <svg class="w-16 h-16 text-slate-700 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-      <h3 class="text-slate-400 font-medium mb-1">No patients found</h3>
-      <p class="text-slate-600 text-sm">Try adjusting your search or filters</p>
+    <div class="text-center py-16 text-[#969696] text-xs">
+      No patient records match the current filter parameters.
     </div>
     } @else {
     <div class="overflow-x-auto">
-      <table class="w-full text-sm">
+      <table class="w-full text-xs">
         <thead>
-          <tr class="border-b border-slate-700/50 bg-slate-800/30">
-            <th class="text-left text-slate-400 font-medium px-4 py-3">Lab ID</th>
-            <th class="text-left text-slate-400 font-medium px-4 py-3">Patient Info</th>
-            <th class="text-left text-slate-400 font-medium px-4 py-3">Tests</th>
-            <th class="text-left text-slate-400 font-medium px-4 py-3">Referred By</th>
-            <th class="text-left text-slate-400 font-medium px-4 py-3">Date</th>
-            <th class="text-left text-slate-400 font-medium px-4 py-3">Priority</th>
-            <th class="text-left text-slate-400 font-medium px-4 py-3">Status</th>
-            <th class="text-left text-slate-400 font-medium px-4 py-3">Actions</th>
+          <tr class="border-b border-[#404040] text-left text-[#969696] uppercase tracking-[1.1px]">
+            <th class="pb-3 pr-4">Lab ID</th>
+            <th class="pb-3 pr-4">Patient Name</th>
+            <th class="pb-3 pr-4">Demographics</th>
+            <th class="pb-3 pr-4">Referred By</th>
+            <th class="pb-3 pr-4">Tests Ordered</th>
+            <th class="pb-3 pr-4">Priority</th>
+            <th class="pb-3 pr-4">Status</th>
+            <th class="pb-3 text-right">Actions</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-slate-700/30">
+        <tbody class="divide-y divide-[#404040]">
           @for (patient of filtered(); track patient.id) {
-          <tr class="hover:bg-slate-700/15 transition-colors group">
-            <td class="px-4 py-4">
-              <span class="text-teal-400 font-mono text-xs">{{ patient.patientId }}</span>
+          <tr class="hover:bg-[#181818] transition-colors">
+            <td class="py-3.5 pr-4 text-[#da291c] font-mono font-bold">{{ patient.patientId }}</td>
+            <td class="py-3.5 pr-4 text-white font-bold uppercase">{{ patient.name }}</td>
+            <td class="py-3.5 pr-4 text-[#969696]">{{ patient.age }}y / {{ patient.gender }}</td>
+            <td class="py-3.5 pr-4 text-white font-medium">{{ patient.doctorName }}</td>
+            <td class="py-3.5 pr-4 text-[#969696] max-w-xs truncate" [title]="getTestsSummary(patient)">
+              {{ getTestsSummary(patient) }}
             </td>
-            <td class="px-4 py-4">
-              <p class="text-white font-medium">{{ patient.name }}</p>
-              <p class="text-slate-500 text-xs mt-0.5">{{ patient.age }} yrs • {{ patient.gender }}</p>
-              <p class="text-slate-600 text-xs">{{ patient.contact }}</p>
-            </td>
-            <td class="px-4 py-4">
-              <div class="space-y-1 max-w-[200px]">
-                @for (test of patient.tests; track test.id) {
-                <p class="text-slate-400 text-xs truncate">• {{ test.testName }}</p>
-                }
-              </div>
-            </td>
-            <td class="px-4 py-4">
-              <p class="text-slate-300 text-xs">{{ patient.doctorName }}</p>
-              @if (patient.referredFrom) {
-              <p class="text-slate-500 text-xs truncate max-w-[140px]">{{ patient.referredFrom }}</p>
-              }
-            </td>
-            <td class="px-4 py-4 text-slate-400 text-xs whitespace-nowrap">
-              {{ formatDate(patient.dateRegistered) }}
-            </td>
-            <td class="px-4 py-4">
+            <td class="py-3.5 pr-4">
               @if (patient.priority === 'Urgent') {
-              <span class="inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-full font-semibold bg-red-500/15 text-red-400 border border-red-500/30">
-                <span class="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse"></span>
-                Urgent
-              </span>
+              <span class="badge-ferrari-red">URGENT</span>
               } @else {
-              <span class="text-xs px-2.5 py-1 rounded-full font-medium bg-slate-700/50 text-slate-400 border border-slate-600/30">Normal</span>
+              <span class="text-[#969696] font-semibold uppercase">NORMAL</span>
               }
             </td>
-            <td class="px-4 py-4">
+            <td class="py-3.5 pr-4">
               <span class="badge" [class]="getStatusClass(patient.status)">{{ patient.status }}</span>
             </td>
-            <td class="px-4 py-4">
-              <div class="flex items-center gap-1.5">
+            <td class="py-3.5 text-right">
+              <div class="flex items-center justify-end gap-2">
                 <a [routerLink]="['/patients', patient.id, 'results']"
-                  title="Enter Results"
-                  class="p-2 rounded-lg bg-teal-500/10 text-teal-400 hover:bg-teal-500/20 transition-colors">
-                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                  </svg>
+                  class="px-3 py-1 bg-[#da291c] text-white font-bold text-[11px] uppercase tracking-[1px] hover:bg-[#b01e0a]">
+                  Results
                 </a>
-                <a [routerLink]="['/patients', patient.id, 'edit']"
-                  title="Edit Patient"
-                  class="p-2 rounded-lg bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 transition-colors">
-                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                  </svg>
-                </a>
+
                 @if (patient.status === 'Completed') {
                 <a [routerLink]="['/patients', patient.id, 'report']"
-                  title="Print Report"
-                  class="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 transition-colors">
-                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
-                  </svg>
+                  class="px-3 py-1 bg-[#303030] border border-[#d2d2d2] text-white font-bold text-[11px] uppercase tracking-[1px] hover:bg-white hover:text-[#181818]">
+                  Report
                 </a>
                 }
+
+                <a [routerLink]="['/patients', patient.id, 'edit']"
+                  class="px-2.5 py-1 bg-[#303030] border border-[#404040] text-[#969696] font-bold text-[11px] uppercase tracking-[1px] hover:text-white">
+                  Edit
+                </a>
+
                 @if (isAdmin()) {
                 <button (click)="deletePatient(patient.id, patient.name)"
-                  title="Delete (Admin Only)"
-                  class="p-2 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-colors">
-                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                  </svg>
+                  class="px-2.5 py-1 bg-transparent border border-[#da291c] text-[#da291c] font-bold text-[11px] uppercase tracking-[1px] hover:bg-[#da291c] hover:text-white">
+                  Delete
                 </button>
                 }
               </div>

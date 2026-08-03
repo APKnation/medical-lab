@@ -1,0 +1,353 @@
+<div class="min-h-screen bg-[#181818] text-[#ffffff] font-sans selection:bg-[#da291c] selection:text-white">
+
+  <!-- Top Navigation (top-nav-on-dark) -->
+  <header class="sticky top-0 z-50 bg-[#181818] border-b border-[#303030]">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <!-- Cavallino/Lab Brand Mark -->
+      <div class="flex items-center gap-4">
+        <div class="w-10 h-10 bg-[#da291c] flex items-center justify-center font-black text-white text-lg tracking-tighter">
+          LC
+        </div>
+        <div>
+          <span class="text-xl font-medium tracking-tight text-white uppercase">
+            LifeCare <span class="text-[#da291c] font-bold">Medical Lab</span>
+          </span>
+          <p class="text-[10px] text-[#969696] font-semibold tracking-[1.4px] uppercase -mt-1">ISO 15189 Certified</p>
+        </div>
+      </div>
+
+      <!-- Nav Links (nav-link style: uppercase, tracking-0.65px) -->
+      <nav class="hidden md:flex items-center gap-8 text-xs font-semibold text-[#969696] uppercase tracking-[0.65px]">
+        <a href="#departments" class="hover:text-white transition-colors">Departments</a>
+        <a href="#catalog" class="hover:text-white transition-colors">Test Directory</a>
+        <a href="#telemetry" class="hover:text-white transition-colors">Clinical Standards</a>
+        <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
+        <a href="#contact" class="hover:text-white transition-colors">Location</a>
+      </nav>
+
+      <!-- Action Button (button-primary: Rosso Corsa, sharp 0px, uppercase 1.4px tracking) -->
+      <div class="flex items-center gap-4">
+        @if (isLoggedIn()) {
+        <a routerLink="/dashboard" class="btn-ferrari-primary text-xs">
+          Dashboard &rarr;
+        </a>
+        } @else {
+        <a routerLink="/login" class="btn-ferrari-outline text-xs">
+          Staff Portal &rarr;
+        </a>
+        }
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section (hero-band-cinema: Cinematic Photography, Rosso Corsa accents) -->
+  <section class="relative overflow-hidden pt-16 pb-24 lg:pt-24 lg:pb-36 border-b border-[#303030]">
+    <!-- Ambient Rosso Corsa Racing Glow -->
+    <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-[#da291c]/10 rounded-full blur-[160px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      <div class="text-center max-w-4xl mx-auto space-y-6">
+        <!-- Livery Badge Pill -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-[#303030] border border-[#404040] text-[#da291c] text-xs font-semibold uppercase tracking-[1.4px]">
+          <span class="w-2 h-2 bg-[#da291c]"></span>
+          Official Laboratory Diagnostics Surface
+        </div>
+
+        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-medium tracking-tight text-white leading-none">
+          PERFORMANCE <span class="text-[#da291c]">DIAGNOSTICS</span>
+        </h1>
+
+        <p class="text-lg text-[#969696] max-w-2xl mx-auto font-normal leading-relaxed">
+          High-throughput clinical chemistry, hematology, and serology analysis calibrated for extreme accuracy, rapid turnaround, and doctor-verified reporting.
+        </p>
+
+        <div class="flex flex-wrap items-center justify-center gap-4 pt-6">
+          <a href="#catalog" class="btn-ferrari-primary">
+            Explore Test Catalog
+          </a>
+          <a routerLink="/login" class="btn-ferrari-outline">
+            Access Staff Portal
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Spec & Race Telemetry Counter Band (spec-cell: 80px display numbers) -->
+  <section class="bg-[#181818] border-b border-[#303030] py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x-0 md:divide-x divide-[#303030]">
+        <div class="px-4">
+          <p class="race-number-display">50K+</p>
+          <p class="text-xs font-semibold uppercase tracking-[1.4px] text-[#969696] mt-2">Tests Processed</p>
+        </div>
+        <div class="px-4">
+          <p class="spec-number-display">&lt;1h</p>
+          <p class="text-xs font-semibold uppercase tracking-[1.4px] text-[#969696] mt-2">Routine Turnaround</p>
+        </div>
+        <div class="px-4">
+          <p class="race-number-display">99.9%</p>
+          <p class="text-xs font-semibold uppercase tracking-[1.4px] text-[#969696] mt-2">Analytical Precision</p>
+        </div>
+        <div class="px-4">
+          <p class="spec-number-display">13</p>
+          <p class="text-xs font-semibold uppercase tracking-[1.4px] text-[#969696] mt-2">Core Panels</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Departments Section (feature-card-photo style) -->
+  <section id="departments" class="py-24 border-b border-[#303030]">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="mb-16 border-l-4 border-[#da291c] pl-6">
+        <span class="text-xs font-bold text-[#da291c] uppercase tracking-[1.4px]">Clinical Operations</span>
+        <h2 class="text-3xl sm:text-4xl font-medium text-white uppercase tracking-tight mt-1">Diagnostic Departments</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="card-ferrari flex flex-col justify-between group hover:border-[#da291c] transition-colors">
+          <div>
+            <span class="badge-ferrari-red mb-4">HEM-01</span>
+            <h3 class="text-xl font-bold text-white uppercase tracking-tight mb-2">Hematology</h3>
+            <p class="text-sm text-[#969696] leading-relaxed">Complete blood counts (CBC), WBC differentials, platelet indices, and coagulation profiling on automated 5-part analyzers.</p>
+          </div>
+          <div class="mt-8 pt-4 border-t border-[#404040] text-xs font-bold text-[#da291c] uppercase tracking-[1.1px]">
+            Automated Differential &rarr;
+          </div>
+        </div>
+
+        <div class="card-ferrari flex flex-col justify-between group hover:border-[#da291c] transition-colors">
+          <div>
+            <span class="badge-ferrari-red mb-4">CHM-02</span>
+            <h3 class="text-xl font-bold text-white uppercase tracking-tight mb-2">Clinical Chemistry</h3>
+            <p class="text-sm text-[#969696] leading-relaxed">Metabolic panels, renal/kidney function tests, liver function profiles, lipid panels, and glycemic control measurements.</p>
+          </div>
+          <div class="mt-8 pt-4 border-t border-[#404040] text-xs font-bold text-[#da291c] uppercase tracking-[1.1px]">
+            Spectrophotometric Chem &rarr;
+          </div>
+        </div>
+
+        <div class="card-ferrari flex flex-col justify-between group hover:border-[#da291c] transition-colors">
+          <div>
+            <span class="badge-ferrari-red mb-4">IMM-03</span>
+            <h3 class="text-xl font-bold text-white uppercase tracking-tight mb-2">Serology & Immunology</h3>
+            <p class="text-sm text-[#969696] leading-relaxed">Hepatitis screening (HBsAg, HCV), HIV 1&2 immunoassays, Widal typhoid agglutination, and viral marker profiling.</p>
+          </div>
+          <div class="mt-8 pt-4 border-t border-[#404040] text-xs font-bold text-[#da291c] uppercase tracking-[1.1px]">
+            Chemiluminescence Assays &rarr;
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Editorial Contrast Band for Public Test Directory (hero-band-light / canvas-light style: White Background) -->
+  <section id="catalog" class="bg-[#ffffff] text-[#181818] py-24 border-b border-[#d2d2d2]">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 border-b border-[#d2d2d2] pb-8">
+        <div>
+          <span class="text-xs font-bold text-[#da291c] uppercase tracking-[1.4px]">Public Specification Directory</span>
+          <h2 class="text-3xl font-medium text-[#181818] uppercase tracking-tight mt-1">Available Test Catalog</h2>
+          <p class="text-[#666666] text-sm mt-2">Inspect sample requirements, turn-around metrics, and reference ranges.</p>
+        </div>
+
+        <!-- Search Bar on Light Canvas -->
+        <div class="relative w-full md:w-80">
+          <input type="text" [(ngModel)]="searchQuery" placeholder="Search by name or code..."
+            class="w-full bg-[#f7f7f7] border border-[#d2d2d2] rounded-none px-4 py-3 text-[#181818] placeholder-[#969696] text-sm focus:outline-none focus:border-[#da291c] transition-colors" />
+        </div>
+      </div>
+
+      <!-- Category Filter Buttons on Light Canvas -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-6 mb-8">
+        @for (cat of categories; track cat) {
+        <button (click)="selectCategory(cat)"
+          class="px-4 py-2.5 rounded-none text-xs font-bold uppercase tracking-[1.1px] transition-all"
+          [class]="selectedCategory() === cat
+            ? 'bg-[#da291c] text-white'
+            : 'bg-[#ebebeb] text-[#181818] hover:bg-[#d2d2d2]'">
+          {{ cat }}
+        </button>
+        }
+      </div>
+
+      <!-- Preowned-Listing / Spec Card Grid (preowned-listing-card style: White Card on White Canvas) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        @for (test of filteredTests; track test.code) {
+        <div class="p-6 bg-[#ffffff] border border-[#d2d2d2] flex flex-col justify-between hover:border-[#da291c] transition-colors">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="bg-[#181818] text-white font-mono text-xs font-bold px-2.5 py-1">
+                {{ test.code }}
+              </span>
+              <span class="text-xs text-[#666666] font-semibold uppercase tracking-wider">
+                {{ test.turnaroundTime }}
+              </span>
+            </div>
+
+            <h3 class="text-lg font-bold text-[#181818] uppercase tracking-tight">{{ test.name }}</h3>
+            <p class="text-xs text-[#da291c] font-bold uppercase tracking-wider mb-2">{{ test.category }}</p>
+            <p class="text-[#666666] text-xs leading-relaxed line-clamp-2 mb-4">{{ test.description }}</p>
+          </div>
+
+          <div class="pt-4 border-t border-[#ebebeb] flex items-center justify-between">
+            <span class="text-xs text-[#666666]">
+              Specimen: <strong class="text-[#181818]">{{ test.sampleType }}</strong>
+            </span>
+            <button (click)="openTestModal(test)" class="text-xs font-bold text-[#da291c] uppercase tracking-[1.1px] hover:underline">
+              Inspect Spec &rarr;
+            </button>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Test Spec Details Modal -->
+  @if (selectedTestModal()) {
+  <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#181818]/90">
+    <div class="bg-[#181818] border border-[#da291c] max-w-xl w-full p-8 space-y-6">
+      <div class="flex items-start justify-between border-b border-[#303030] pb-4">
+        <div>
+          <span class="bg-[#da291c] text-white font-mono text-xs font-bold px-2.5 py-1 uppercase tracking-wider">
+            {{ selectedTestModal()!.code }}
+          </span>
+          <h3 class="text-2xl font-bold text-white uppercase tracking-tight mt-2">{{ selectedTestModal()!.name }}</h3>
+          <p class="text-xs text-[#969696] uppercase tracking-wider">{{ selectedTestModal()!.category }}</p>
+        </div>
+        <button (click)="closeModal()" class="text-[#969696] hover:text-white p-2 border border-[#303030]">
+          ✕
+        </button>
+      </div>
+
+      <p class="text-sm text-[#969696] leading-relaxed">{{ selectedTestModal()!.description }}</p>
+
+      <div class="grid grid-cols-2 gap-4 p-4 bg-[#303030] border border-[#404040] text-xs">
+        <div>
+          <p class="text-[#969696] uppercase tracking-wider">Specimen Required</p>
+          <p class="text-white font-bold mt-1">{{ selectedTestModal()!.sampleType }}</p>
+        </div>
+        <div>
+          <p class="text-[#969696] uppercase tracking-wider">Turnaround Time</p>
+          <p class="text-white font-bold mt-1">{{ selectedTestModal()!.turnaroundTime }}</p>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="text-xs font-bold text-[#da291c] uppercase tracking-[1.1px] mb-3">Parameters & Reference Intervals</h4>
+        <div class="space-y-2 max-h-48 overflow-y-auto pr-1">
+          @for (param of selectedTestModal()!.parameters; track param.name) {
+          <div class="flex items-center justify-between p-3 bg-[#303030] text-xs">
+            <span class="text-white font-medium">{{ param.name }}</span>
+            <span class="text-[#969696] font-mono">
+              {{ param.normalRange }} {{ param.unit }}
+            </span>
+          </div>
+          }
+        </div>
+      </div>
+
+      <div class="pt-4 border-t border-[#303030] flex justify-end">
+        <button (click)="closeModal()" class="btn-ferrari-outline text-xs">
+          Close Window
+        </button>
+      </div>
+    </div>
+  </div>
+  }
+
+  <!-- Clinical Telemetry & Quality Standards (livery-band style: Rosso Corsa Accent Band) -->
+  <section id="telemetry" class="bg-[#da291c] text-white py-20">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="text-xs font-bold text-white uppercase tracking-[1.4px] opacity-80">Rigor & Precision</span>
+          <h2 class="text-4xl font-medium tracking-tight uppercase leading-tight mt-2 mb-6">Automated Flagging & Formal Clinical Seals</h2>
+          <p class="text-white/90 text-sm leading-relaxed mb-6">
+            Our diagnostic reporting pipeline cross-checks entered parameters against biological age/gender normal ranges to instantly compute High, Low, and Abnormal flags.
+          </p>
+          <a routerLink="/login" class="btn-ferrari-outline border-white text-white hover:bg-white hover:text-[#da291c]">
+            Staff Portal Login &rarr;
+          </a>
+        </div>
+
+        <div class="bg-[#181818] p-8 border border-white/20">
+          <div class="text-xs text-[#da291c] font-bold uppercase tracking-[1.4px] mb-2">Telemetry Specimen Card</div>
+          <h4 class="text-xl font-bold text-white uppercase mb-4">Complete Blood Count (CBC)</h4>
+          <div class="space-y-3 font-mono text-xs">
+            <div class="flex items-center justify-between p-3 bg-[#303030]">
+              <span class="text-[#969696]">HEMOGLOBIN (HB)</span>
+              <span class="text-[#03904a] font-bold">14.8 G/DL [NORMAL]</span>
+            </div>
+            <div class="flex items-center justify-between p-3 bg-[#303030]">
+              <span class="text-[#969696]">WBC COUNT</span>
+              <span class="text-[#da291c] font-bold">12.5 X10^3/µL [HIGH ↑]</span>
+            </div>
+            <div class="flex items-center justify-between p-3 bg-[#303030]">
+              <span class="text-[#969696]">PLATELET COUNT</span>
+              <span class="text-[#03904a] font-bold">280 X10^3/µL [NORMAL]</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section (dark background with sharp #303030 accordion rows) -->
+  <section id="faq" class="py-24 border-b border-[#303030]">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <span class="text-xs font-bold text-[#da291c] uppercase tracking-[1.4px]">Information</span>
+        <h2 class="text-3xl font-medium text-white uppercase tracking-tight mt-1">Frequently Asked Questions</h2>
+      </div>
+
+      <div class="space-y-4">
+        @for (faq of faqs; track $index) {
+        <div class="border border-[#303030] bg-[#181818]">
+          <button (click)="toggleFaq($index)"
+            class="w-full px-6 py-5 text-left flex items-center justify-between font-bold text-white text-sm uppercase tracking-wide hover:text-[#da291c] transition-colors">
+            <span>{{ faq.q }}</span>
+            <span class="text-[#da291c] text-lg font-mono">{{ activeFaq() === $index ? '−' : '+' }}</span>
+          </button>
+          @if (activeFaq() === $index) {
+          <div class="px-6 pb-6 text-sm text-[#969696] leading-relaxed border-t border-[#303030] pt-4">
+            {{ faq.a }}
+          </div>
+          }
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer (footer-dark style) -->
+  <footer id="contact" class="bg-[#181818] py-16 text-[#969696] text-xs">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 border-b border-[#303030] pb-12">
+      <div>
+        <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-3">LifeCare Medical Laboratory</h4>
+        <p class="leading-relaxed">P.O. Box 1234-00100, Nairobi, Kenya<br>KMPDC Lic. KE/LAB/2025/001</p>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-3">Operating Schedule</h4>
+        <p class="leading-relaxed">Mon - Fri: 07:00 – 20:00<br>Sat - Sun: 08:00 – 17:00<br>Emergency 24/7 Specimen Processing</p>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-3">Direct Contact</h4>
+        <p class="leading-relaxed">Phone: +254 700 123 456<br>Email: info&#64;lifecarelab.co.ke</p>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p>&copy; 2026 LifeCare Medical Laboratory. Designed with precision inspired by Ferrari.</p>
+      <div class="flex items-center gap-6 font-semibold uppercase tracking-wider text-[11px]">
+        <a routerLink="/login" class="hover:text-white transition-colors">Staff Login</a>
+        <a href="#catalog" class="hover:text-white transition-colors">Test Directory</a>
+      </div>
+    </div>
+  </footer>
+
+</div>

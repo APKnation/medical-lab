@@ -1,59 +1,49 @@
-<div class="space-y-6">
+<div class="max-w-4xl mx-auto space-y-8">
   <!-- Header -->
-  <div class="flex items-center gap-4">
-    <a routerLink="/patients"
-      class="p-2 rounded-xl bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-all">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-      </svg>
-    </a>
-    <div>
-      <h1 class="text-2xl font-bold text-white">{{ isEdit ? 'Edit Patient Record' : 'Register New Patient' }}</h1>
-      <p class="text-slate-400 text-sm mt-1">{{ isEdit ? 'Update patient information' : 'Enter patient details and order tests' }}</p>
+  <div class="flex items-center justify-between border-b border-[#303030] pb-6">
+    <div class="flex items-center gap-4">
+      <a routerLink="/patients" class="px-3 py-2 bg-[#303030] border border-[#404040] text-[#969696] hover:text-white font-bold text-xs uppercase tracking-wider">
+        &larr; Back
+      </a>
+      <div>
+        <h1 class="text-3xl font-bold text-white uppercase tracking-tight">
+          {{ isEdit ? 'Edit Patient Record' : 'Register New Patient' }}
+        </h1>
+        <p class="text-[#969696] text-xs mt-1">Enter patient demographics and assign required laboratory investigations.</p>
+      </div>
     </div>
   </div>
 
-  <!-- Success Banner -->
   @if (saved()) {
-  <div class="flex items-center gap-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl px-5 py-4">
-    <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>
-    <p class="text-emerald-400 font-medium">Patient {{ isEdit ? 'updated' : 'registered' }} successfully! Redirecting...</p>
+  <div class="p-4 bg-[#03904a] text-white font-bold text-sm uppercase tracking-wider text-center">
+    ✓ Patient record successfully saved! Redirecting...
   </div>
   }
 
-  <form (ngSubmit)="onSubmit()" #pForm="ngForm" novalidate class="space-y-6">
+  <form (ngSubmit)="onSubmit()" class="space-y-8">
+    <!-- Patient Demographics Section -->
+    <div class="card-ferrari space-y-6">
+      <div class="border-b border-[#404040] pb-3 border-l-4 border-[#da291c] pl-4">
+        <h3 class="text-lg font-bold text-white uppercase tracking-tight">1. Patient Demographics</h3>
+        <p class="text-[#969696] text-xs">Primary identification and contact information.</p>
+      </div>
 
-    <!-- Patient Information -->
-    <div class="card">
-      <h2 class="text-lg font-semibold text-white mb-5 flex items-center gap-2">
-        <div class="w-7 h-7 rounded-lg bg-teal-500/15 flex items-center justify-center">
-          <svg class="w-4 h-4 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-          </svg>
-        </div>
-        Patient Information
-      </h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <div class="lg:col-span-2">
-          <label class="form-label">Full Name <span class="text-red-400">*</span></label>
-          <input type="text" name="name" [(ngModel)]="form.name" required
-            placeholder="Enter patient's full name"
-            class="form-input" />
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="md:col-span-2">
+          <label class="form-label">Full Patient Name *</label>
+          <input type="text" [(ngModel)]="form.name" name="name" required placeholder="e.g. John Doe"
+            class="form-input-ferrari" />
         </div>
 
         <div>
-          <label class="form-label">Age (years) <span class="text-red-400">*</span></label>
-          <input type="number" name="age" [(ngModel)]="form.age" min="0" max="150" required
-            placeholder="Age"
-            class="form-input" />
+          <label class="form-label">Age (Years) *</label>
+          <input type="number" [(ngModel)]="form.age" name="age" min="0" max="130" required
+            class="form-input-ferrari" />
         </div>
 
         <div>
-          <label class="form-label">Gender <span class="text-red-400">*</span></label>
-          <select name="gender" [(ngModel)]="form.gender" class="form-input">
+          <label class="form-label">Gender *</label>
+          <select [(ngModel)]="form.gender" name="gender" class="form-input-ferrari">
             <option value="Male">Male</option>
             <option value="Female">Female</option>
             <option value="Other">Other</option>
@@ -62,115 +52,90 @@
 
         <div>
           <label class="form-label">Contact Number</label>
-          <input type="tel" name="contact" [(ngModel)]="form.contact"
-            placeholder="+254 700 000 000"
-            class="form-input" />
+          <input type="text" [(ngModel)]="form.contact" name="contact" placeholder="+254 700 000 000"
+            class="form-input-ferrari" />
         </div>
 
         <div>
-          <label class="form-label">Priority</label>
-          <select name="priority" [(ngModel)]="form.priority" class="form-input">
+          <label class="form-label">Residential Address</label>
+          <input type="text" [(ngModel)]="form.address" name="address" placeholder="City / Area"
+            class="form-input-ferrari" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Referral Information -->
+    <div class="card-ferrari space-y-6">
+      <div class="border-b border-[#404040] pb-3 border-l-4 border-[#da291c] pl-4">
+        <h3 class="text-lg font-bold text-white uppercase tracking-tight">2. Referral Details</h3>
+        <p class="text-[#969696] text-xs">Requesting physician and health facility.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div>
+          <label class="form-label">Referred By (Doctor Name) *</label>
+          <input type="text" [(ngModel)]="form.doctorName" name="doctorName" required placeholder="Dr. Smith"
+            class="form-input-ferrari" />
+        </div>
+
+        <div>
+          <label class="form-label">Referred From (Clinic/Hospital)</label>
+          <input type="text" [(ngModel)]="form.referredFrom" name="referredFrom" placeholder="LifeCare Hospital"
+            class="form-input-ferrari" />
+        </div>
+
+        <div>
+          <label class="form-label">Priority Order</label>
+          <select [(ngModel)]="form.priority" name="priority" class="form-input-ferrari">
             <option value="Normal">Normal</option>
-            <option value="Urgent">🔴 Urgent</option>
+            <option value="Urgent">Urgent</option>
           </select>
         </div>
-
-        <div class="lg:col-span-3">
-          <label class="form-label">Address / Location</label>
-          <input type="text" name="address" [(ngModel)]="form.address"
-            placeholder="City, County, Country"
-            class="form-input" />
-        </div>
       </div>
     </div>
 
-    <!-- Doctor / Referral -->
-    <div class="card">
-      <h2 class="text-lg font-semibold text-white mb-5 flex items-center gap-2">
-        <div class="w-7 h-7 rounded-lg bg-blue-500/15 flex items-center justify-center">
-          <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-          </svg>
-        </div>
-        Referral Information
-      </h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <div>
-          <label class="form-label">Referring Doctor <span class="text-red-400">*</span></label>
-          <input type="text" name="doctorName" [(ngModel)]="form.doctorName" required
-            placeholder="Dr. Full Name"
-            class="form-input" />
-        </div>
-
-        <div>
-          <label class="form-label">Doctor's Contact</label>
-          <input type="tel" name="doctorContact" [(ngModel)]="form.doctorContact"
-            placeholder="+254 700 000 000"
-            class="form-input" />
-        </div>
-
-        <div>
-          <label class="form-label">Referred From (Hospital/Clinic)</label>
-          <input type="text" name="referredFrom" [(ngModel)]="form.referredFrom"
-            placeholder="Hospital or clinic name"
-            class="form-input" />
-        </div>
+    <!-- Test Investigation Picker -->
+    <div class="card-ferrari space-y-6">
+      <div class="border-b border-[#404040] pb-3 border-l-4 border-[#da291c] pl-4">
+        <h3 class="text-lg font-bold text-white uppercase tracking-tight">3. Laboratory Tests Ordered</h3>
+        <p class="text-[#969696] text-xs">Select test investigations from the official catalog.</p>
       </div>
-    </div>
 
-    <!-- Test Selection -->
-    <div class="card">
-      <h2 class="text-lg font-semibold text-white mb-5 flex items-center gap-2">
-        <div class="w-7 h-7 rounded-lg bg-purple-500/15 flex items-center justify-center">
-          <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-          </svg>
-        </div>
-        Ordered Tests <span class="text-red-400 text-sm font-normal">(at least one required)</span>
-      </h2>
-
-      <!-- Test Picker -->
-      <div class="flex gap-3 mb-5">
-        <select [(ngModel)]="selectedTestCode" name="testPicker"
-          class="flex-1 form-input">
-          <option value="">— Select a test to add —</option>
+      <!-- Add Test Picker Bar -->
+      <div class="flex flex-col sm:flex-row gap-3">
+        <select [(ngModel)]="selectedTestCode" name="selectedTestCode" class="form-input-ferrari flex-1">
+          <option value="">-- Select Test Investigation --</option>
           @for (test of availableTests; track test.code) {
           <option [value]="test.code" [disabled]="isTestAdded(test.code)">
-            {{ test.name }} ({{ test.category }}){{ isTestAdded(test.code) ? ' ✓ Added' : '' }}
+            {{ test.code }} — {{ test.name }} ({{ test.category }})
           </option>
           }
         </select>
-        <button type="button" (click)="addTest()" [disabled]="!selectedTestCode"
-          class="px-5 py-2.5 rounded-xl bg-teal-500/15 text-teal-400 border border-teal-500/30 hover:bg-teal-500/25 transition-colors font-medium text-sm disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-2 whitespace-nowrap">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-          </svg>
-          Add Test
+
+        <button type="button" (click)="addTest()" class="btn-ferrari-outline text-xs whitespace-nowrap">
+          + Add Test
         </button>
       </div>
 
-      <!-- Added Tests -->
+      <!-- Selected Tests Table -->
       @if (form.tests.length === 0) {
-      <div class="text-center py-8 border-2 border-dashed border-slate-700 rounded-xl">
-        <svg class="w-10 h-10 text-slate-600 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-        </svg>
-        <p class="text-slate-500 text-sm">No tests added yet. Select a test above.</p>
+      <div class="p-6 bg-[#181818] text-center text-[#969696] text-xs border border-[#404040]">
+        No laboratory tests added yet. Select a test from the dropdown above and click "+ Add Test".
       </div>
       } @else {
-      <div class="space-y-3">
+      <div class="space-y-2">
         @for (test of form.tests; track test.id) {
-        <div class="flex items-center justify-between bg-slate-800/50 border border-slate-700/50 rounded-xl px-4 py-3">
+        <div class="flex items-center justify-between p-3.5 bg-[#181818] border border-[#404040]">
           <div>
-            <p class="text-white font-medium text-sm">{{ test.testName }}</p>
-            <p class="text-slate-500 text-xs mt-0.5">{{ test.category }} • {{ test.parameters.length }} parameters</p>
+            <span class="bg-[#da291c] text-white font-mono text-xs font-bold px-2 py-0.5 mr-2">
+              {{ test.testCode }}
+            </span>
+            <span class="text-white font-bold text-xs uppercase">{{ test.testName }}</span>
+            <span class="text-[#969696] text-xs ml-2">({{ test.category }})</span>
           </div>
-          <button type="button" (click)="removeTest(test.id)"
-            class="p-1.5 rounded-lg text-slate-500 hover:text-red-400 hover:bg-red-500/10 transition-all">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
+
+          <button type="button" (click)="removeTest(test.id)" class="text-[#da291c] text-xs font-bold uppercase hover:underline">
+            Remove
           </button>
         </div>
         }
@@ -179,45 +144,19 @@
     </div>
 
     <!-- Notes -->
-    <div class="card">
-      <h2 class="text-lg font-semibold text-white mb-5 flex items-center gap-2">
-        <div class="w-7 h-7 rounded-lg bg-amber-500/15 flex items-center justify-center">
-          <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
-          </svg>
-        </div>
-        Clinical Notes
-      </h2>
-      <textarea name="notes" [(ngModel)]="form.notes" rows="3"
-        placeholder="E.g. Fasting patient, patient on medication, special instructions..."
-        class="form-input resize-none"></textarea>
+    <div class="card-ferrari space-y-4">
+      <label class="form-label">Clinical Notes / Special Instructions</label>
+      <textarea [(ngModel)]="form.notes" name="notes" rows="3" placeholder="Fasting status, clinical indication, etc..."
+        class="form-input-ferrari"></textarea>
     </div>
 
     <!-- Actions -->
-    <div class="flex items-center justify-end gap-3">
-      <a routerLink="/patients"
-        class="px-6 py-2.5 rounded-xl border border-slate-600 text-slate-400 hover:text-white hover:border-slate-500 transition-all text-sm font-medium">
+    <div class="flex items-center justify-end gap-4">
+      <a routerLink="/patients" class="btn-ferrari-outline">
         Cancel
       </a>
-      <button type="submit" [disabled]="saving() || saved()"
-        class="px-8 py-2.5 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-600 text-white font-semibold text-sm shadow-lg shadow-teal-500/20 hover:from-teal-400 hover:to-cyan-500 transition-all duration-200 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2">
-        @if (saving()) {
-        <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
-        </svg>
-        Saving...
-        } @else if (saved()) {
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-        </svg>
-        Saved!
-        } @else {
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-        </svg>
-        {{ isEdit ? 'Update Patient' : 'Register Patient' }}
-        }
+      <button type="submit" [disabled]="saving()" class="btn-ferrari-primary">
+        {{ saving() ? 'Saving Record...' : (isEdit ? 'Update Patient' : 'Save Patient Record') }}
       </button>
     </div>
   </form>
