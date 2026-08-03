@@ -12,8 +12,8 @@ import { Patient } from '../../models/patient.model';
   templateUrl: './patient-list.html',
 })
 export class PatientListComponent {
-  private patientSvc = inject(PatientService);
-  private auth = inject(AuthService);
+  private patientSvc: PatientService = inject(PatientService);
+  private auth: AuthService = inject(AuthService);
 
   readonly isAdmin = this.auth.isAdmin;
 

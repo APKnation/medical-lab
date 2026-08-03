@@ -10,8 +10,8 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './dashboard.html',
 })
 export class DashboardComponent {
-  private patientSvc = inject(PatientService);
-  private auth = inject(AuthService);
+  private patientSvc: PatientService = inject(PatientService);
+  private auth: AuthService = inject(AuthService);
 
   readonly staff = this.auth.currentStaff;
   readonly stats = computed(() => this.patientSvc.getStats());

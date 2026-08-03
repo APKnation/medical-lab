@@ -9,8 +9,8 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './navbar.html',
 })
 export class NavbarComponent {
-  private auth = inject(AuthService);
-  private router = inject(Router);
+  private readonly auth: AuthService = inject(AuthService);
+  private readonly router: Router = inject(Router);
 
   readonly staff = this.auth.currentStaff;
   readonly isAdmin = this.auth.isAdmin;

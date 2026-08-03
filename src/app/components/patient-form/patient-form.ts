@@ -14,11 +14,11 @@ import { LabTest } from '../../models/lab-test.model';
   templateUrl: './patient-form.html',
 })
 export class PatientFormComponent implements OnInit {
-  private patientSvc = inject(PatientService);
-  private labTestSvc = inject(LabTestService);
-  private auth = inject(AuthService);
-  private router = inject(Router);
-  private route = inject(ActivatedRoute);
+  private patientSvc: PatientService = inject(PatientService);
+  private labTestSvc: LabTestService = inject(LabTestService);
+  private auth: AuthService = inject(AuthService);
+  private router: Router = inject(Router);
+  private route: ActivatedRoute = inject(ActivatedRoute);
 
   isEdit = false;
   patientId: string | null = null;

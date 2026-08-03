@@ -11,6 +11,6 @@ import { AuthService } from './services/auth.service';
   styleUrl: './app.css',
 })
 export class App {
-  private auth = inject(AuthService);
+  private auth: AuthService = inject(AuthService);
   readonly showSidebar = this.auth.isAuthenticated;
 }
