@@ -10,9 +10,9 @@ import { Patient, PatientTest, TestResultParameter } from '../../models/patient.
   templateUrl: './lab-report.html',
 })
 export class LabReportComponent implements OnInit {
-  private patientSvc = inject(PatientService);
-  private router = inject(Router);
-  private route = inject(ActivatedRoute);
+  private patientSvc: PatientService = inject(PatientService);
+  private router: Router = inject(Router);
+  private route: ActivatedRoute = inject(ActivatedRoute);
 
   patient = signal<Patient | null>(null);
 

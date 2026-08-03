@@ -17,8 +17,8 @@ export class LoginComponent {
   error = signal('');
   currentYear = new Date().getFullYear();
 
-  private auth = inject(AuthService);
-  private router = inject(Router);
+  private auth: AuthService = inject(AuthService);
+  private router: Router = inject(Router);
 
   constructor() {
     if (this.auth.isAuthenticated()) {
