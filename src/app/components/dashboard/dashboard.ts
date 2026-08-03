@@ -47,4 +47,8 @@ export class DashboardComponent {
     if (h < 17) return 'Good Afternoon';
     return 'Good Evening';
   }
+
+  get firstName(): string {
+    return this.staff()?.name?.split(' ')[0] ?? 'Staff';
+  }
 }
