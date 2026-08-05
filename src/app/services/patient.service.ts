@@ -16,7 +16,12 @@ export class PatientService {
     const data = localStorage.getItem(STORAGE_KEY);
     if (data) {
       try {
-        this._patients.set(JSON.parse(data));
+        const parsed = JSON.parse(data) as Patient[];
+        const normalized = this.normalizePatients(parsed);
+        this._patients.set(normalized);
+        if (JSON.stringify(normalized) !== data) {
+          this.saveToStorage();
+        }
       } catch {
         this._patients.set([]);
       }
@@ -24,6 +29,36 @@ export class PatientService {
       this._patients.set(this.getSeedData());
       this.saveToStorage();
     }
+  }
+
+  private normalizePatients(patients: Patient[]): Patient[] {
+    return patients.map((patient) => {
+      const normalizedPatient = { ...patient };
+
+      if (normalizedPatient.name === 'John Mwangi' || normalizedPatient.name === 'Fatuma Achieng' || normalizedPatient.name === 'Grace Nyambura') {
+        normalizedPatient.name = normalizedPatient.name === 'John Mwangi'
+          ? 'Atanas'
+          : normalizedPatient.name === 'Fatuma Achieng'
+            ? 'Elia'
+            : 'Asheri';
+      }
+
+      if (
+        normalizedPatient.doctorName === 'Dr. Amina Hassan' ||
+        normalizedPatient.doctorName === 'Dr. Peter Kamau' ||
+        normalizedPatient.doctorName === 'Dr. David Ochieng' ||
+        normalizedPatient.doctorName === 'Dr. Achien' ||
+        normalizedPatient.doctorName.includes('Achien')
+      ) {
+        normalizedPatient.doctorName = 'Dr. Elestia Patrick';
+      }
+
+      if (normalizedPatient.name === 'Atanas' && normalizedPatient.doctorName === 'Dr. Elestia Patrick') {
+        normalizedPatient.doctorName = 'Dr. Ezekieli';
+      }
+
+      return normalizedPatient;
+    });
   }
 
   private saveToStorage(): void {
@@ -105,12 +140,12 @@ export class PatientService {
       {
         id: 'seed1',
         patientId: 'LCL-2025-0001',
-        name: 'John Mwangi',
+        name: 'Atanas',
         age: 45,
         gender: 'Male',
         contact: '+254 701 234 567',
         address: 'Nairobi, Kenya',
-        doctorName: 'Dr. Amina Hassan',
+        doctorName: 'Dr. Ezekieli',
         doctorContact: '+254 722 111 222',
         referredFrom: 'Nairobi General Hospital',
         priority: 'Normal',
@@ -162,12 +197,12 @@ export class PatientService {
       {
         id: 'seed2',
         patientId: 'LCL-2025-0002',
-        name: 'Fatuma Achieng',
+        name: 'Elia',
         age: 32,
         gender: 'Female',
         contact: '+254 712 345 678',
         address: 'Mombasa, Kenya',
-        doctorName: 'Dr. Peter Kamau',
+        doctorName: 'Dr. Elestia Patrick',
         doctorContact: '+254 733 222 333',
         referredFrom: 'Coastal Medical Centre',
         priority: 'Urgent',
@@ -209,12 +244,12 @@ export class PatientService {
       {
         id: 'seed3',
         patientId: 'LCL-2025-0003',
-        name: 'Grace Nyambura',
+        name: 'Asheri',
         age: 28,
         gender: 'Female',
         contact: '+254 798 456 789',
         address: 'Kisumu, Kenya',
-        doctorName: 'Dr. David Ochieng',
+        doctorName: 'Dr. Elestia Patrick',
         doctorContact: '+254 744 333 444',
         referredFrom: 'Western Regional Hospital',
         priority: 'Normal',

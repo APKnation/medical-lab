@@ -6,7 +6,7 @@ const STAFF_ACCOUNTS: Staff[] = [
     id: '1',
     username: 'admin',
     password: 'admin123',
-    name: 'Dr. James Okonkwo',
+    name: 'Atanas',
     role: 'Admin',
     designation: 'Laboratory Director',
   },
@@ -14,7 +14,7 @@ const STAFF_ACCOUNTS: Staff[] = [
     id: '2',
     username: 'labtech',
     password: 'lab@2025',
-    name: 'Sarah Kimani',
+    name: 'Elia Asheri',
     role: 'Lab Technician',
     designation: 'Senior Lab Technician',
   },
@@ -22,7 +22,7 @@ const STAFF_ACCOUNTS: Staff[] = [
     id: '3',
     username: 'nurse',
     password: 'nurse@2025',
-    name: 'Mary Wanjiku',
+    name: 'Ezekieli Elestia Patrick',
     role: 'Lab Technician',
     designation: 'Lab Assistant',
   },
@@ -40,11 +40,29 @@ export class AuthService {
     const saved = localStorage.getItem('lab_session');
     if (saved) {
       try {
-        this._currentStaff.set(JSON.parse(saved));
+        const parsed = JSON.parse(saved) as Staff;
+        const normalized = this.normalizeStaff(parsed);
+        this._currentStaff.set(normalized);
+        if (JSON.stringify(normalized) !== saved) {
+          localStorage.setItem('lab_session', JSON.stringify(normalized));
+        }
       } catch {
         localStorage.removeItem('lab_session');
       }
     }
+  }
+
+  private normalizeStaff(staff: Staff): Staff {
+    if (staff.username === 'admin') {
+      return { ...staff, name: 'Atanas' };
+    }
+    if (staff.username === 'labtech') {
+      return { ...staff, name: 'Elia Asheri' };
+    }
+    if (staff.username === 'nurse') {
+      return { ...staff, name: 'Ezekieli Elestia Patrick' };
+    }
+    return staff;
   }
 
   login(username: string, password: string): boolean {
