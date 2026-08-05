@@ -66,9 +66,7 @@ export class AuthService {
   }
 
   login(username: string, password: string): boolean {
-    const staff = STAFF_ACCOUNTS.find(
-      (s) => s.username === username && s.password === password
-    );
+    const staff = STAFF_ACCOUNTS.find((s) => s.username === username && s.password === password);
     if (staff) {
       this._currentStaff.set(staff);
       localStorage.setItem('lab_session', JSON.stringify(staff));

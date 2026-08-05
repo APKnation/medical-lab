@@ -35,12 +35,17 @@ export class PatientService {
     return patients.map((patient) => {
       const normalizedPatient = { ...patient };
 
-      if (normalizedPatient.name === 'John Mwangi' || normalizedPatient.name === 'Fatuma Achieng' || normalizedPatient.name === 'Grace Nyambura') {
-        normalizedPatient.name = normalizedPatient.name === 'John Mwangi'
-          ? 'Atanas'
-          : normalizedPatient.name === 'Fatuma Achieng'
-            ? 'Elia'
-            : 'Asheri';
+      if (
+        normalizedPatient.name === 'John Mwangi' ||
+        normalizedPatient.name === 'Fatuma Achieng' ||
+        normalizedPatient.name === 'Grace Nyambura'
+      ) {
+        normalizedPatient.name =
+          normalizedPatient.name === 'John Mwangi'
+            ? 'Atanas'
+            : normalizedPatient.name === 'Fatuma Achieng'
+              ? 'Elia'
+              : 'Asheri';
       }
 
       if (
@@ -53,7 +58,10 @@ export class PatientService {
         normalizedPatient.doctorName = 'Dr. Elestia Patrick';
       }
 
-      if (normalizedPatient.name === 'Atanas' && normalizedPatient.doctorName === 'Dr. Elestia Patrick') {
+      if (
+        normalizedPatient.name === 'Atanas' &&
+        normalizedPatient.doctorName === 'Dr. Elestia Patrick'
+      ) {
         normalizedPatient.doctorName = 'Dr. Ezekieli';
       }
 
@@ -106,16 +114,10 @@ export class PatientService {
     const tests = patient.tests;
     if (tests.length === 0) return patient;
     const allCompleted = tests.every((t) => t.status === 'Completed');
-    const anyInProgress = tests.some(
-      (t) => t.status === 'In Progress' || t.status === 'Completed'
-    );
+    const anyInProgress = tests.some((t) => t.status === 'In Progress' || t.status === 'Completed');
     return {
       ...patient,
-      status: allCompleted
-        ? 'Completed'
-        : anyInProgress
-          ? 'In Progress'
-          : 'Pending',
+      status: allCompleted ? 'Completed' : anyInProgress ? 'In Progress' : 'Pending',
       dateCompleted: allCompleted ? new Date().toISOString() : patient.dateCompleted,
     };
   }
@@ -128,9 +130,7 @@ export class PatientService {
       pending: all.filter((p) => p.status === 'Pending').length,
       inProgress: all.filter((p) => p.status === 'In Progress').length,
       completed: all.filter((p) => p.status === 'Completed').length,
-      todayCount: all.filter(
-        (p) => new Date(p.dateRegistered).toDateString() === today
-      ).length,
+      todayCount: all.filter((p) => new Date(p.dateRegistered).toDateString() === today).length,
       urgent: all.filter((p) => p.priority === 'Urgent').length,
     };
   }
@@ -164,16 +164,58 @@ export class PatientService {
             completedAt: new Date(Date.now() - 2 * 86400000 + 3600000).toISOString(),
             completedBy: 'labtech',
             parameters: [
-              { name: 'Hemoglobin', value: '14.5', unit: 'g/dL', normalRange: '13.5 – 17.5', flag: 'Normal' },
-              { name: 'WBC', value: '7.2', unit: 'x10³/μL', normalRange: '4.5 – 11.0', flag: 'Normal' },
-              { name: 'RBC', value: '5.1', unit: 'x10⁶/μL', normalRange: '4.5 – 5.9', flag: 'Normal' },
-              { name: 'Platelets', value: '220', unit: 'x10³/μL', normalRange: '150 – 400', flag: 'Normal' },
-              { name: 'Hematocrit', value: '44', unit: '%', normalRange: '41 – 53', flag: 'Normal' },
+              {
+                name: 'Hemoglobin',
+                value: '14.5',
+                unit: 'g/dL',
+                normalRange: '13.5 – 17.5',
+                flag: 'Normal',
+              },
+              {
+                name: 'WBC',
+                value: '7.2',
+                unit: 'x10³/μL',
+                normalRange: '4.5 – 11.0',
+                flag: 'Normal',
+              },
+              {
+                name: 'RBC',
+                value: '5.1',
+                unit: 'x10⁶/μL',
+                normalRange: '4.5 – 5.9',
+                flag: 'Normal',
+              },
+              {
+                name: 'Platelets',
+                value: '220',
+                unit: 'x10³/μL',
+                normalRange: '150 – 400',
+                flag: 'Normal',
+              },
+              {
+                name: 'Hematocrit',
+                value: '44',
+                unit: '%',
+                normalRange: '41 – 53',
+                flag: 'Normal',
+              },
               { name: 'MCV', value: '88', unit: 'fL', normalRange: '80 – 100', flag: 'Normal' },
               { name: 'MCH', value: '29', unit: 'pg', normalRange: '27 – 33', flag: 'Normal' },
               { name: 'MCHC', value: '34', unit: 'g/dL', normalRange: '32 – 36', flag: 'Normal' },
-              { name: 'Neutrophils', value: '60', unit: '%', normalRange: '50 – 70', flag: 'Normal' },
-              { name: 'Lymphocytes', value: '32', unit: '%', normalRange: '20 – 40', flag: 'Normal' },
+              {
+                name: 'Neutrophils',
+                value: '60',
+                unit: '%',
+                normalRange: '50 – 70',
+                flag: 'Normal',
+              },
+              {
+                name: 'Lymphocytes',
+                value: '32',
+                unit: '%',
+                normalRange: '20 – 40',
+                flag: 'Normal',
+              },
             ],
           },
           {
@@ -185,10 +227,34 @@ export class PatientService {
             completedAt: new Date(Date.now() - 2 * 86400000 + 7200000).toISOString(),
             completedBy: 'labtech',
             parameters: [
-              { name: 'Total Cholesterol', value: '210', unit: 'mg/dL', normalRange: '< 200', flag: 'High' },
-              { name: 'LDL Cholesterol', value: '128', unit: 'mg/dL', normalRange: '< 130', flag: 'Normal' },
-              { name: 'HDL Cholesterol', value: '42', unit: 'mg/dL', normalRange: '> 40', flag: 'Normal' },
-              { name: 'Triglycerides', value: '145', unit: 'mg/dL', normalRange: '< 150', flag: 'Normal' },
+              {
+                name: 'Total Cholesterol',
+                value: '210',
+                unit: 'mg/dL',
+                normalRange: '< 200',
+                flag: 'High',
+              },
+              {
+                name: 'LDL Cholesterol',
+                value: '128',
+                unit: 'mg/dL',
+                normalRange: '< 130',
+                flag: 'Normal',
+              },
+              {
+                name: 'HDL Cholesterol',
+                value: '42',
+                unit: 'mg/dL',
+                normalRange: '> 40',
+                flag: 'Normal',
+              },
+              {
+                name: 'Triglycerides',
+                value: '145',
+                unit: 'mg/dL',
+                normalRange: '< 150',
+                flag: 'Normal',
+              },
               { name: 'VLDL', value: '29', unit: 'mg/dL', normalRange: '2 – 30', flag: 'Normal' },
             ],
           },
@@ -220,7 +286,13 @@ export class PatientService {
             completedAt: new Date(Date.now() - 86400000 + 3600000).toISOString(),
             completedBy: 'labtech',
             parameters: [
-              { name: 'Fasting Blood Glucose', value: '128', unit: 'mg/dL', normalRange: '70 – 100', flag: 'High' },
+              {
+                name: 'Fasting Blood Glucose',
+                value: '128',
+                unit: 'mg/dL',
+                normalRange: '70 – 100',
+                flag: 'High',
+              },
             ],
           },
           {
@@ -232,10 +304,34 @@ export class PatientService {
             parameters: [
               { name: 'ALT (SGPT)', value: '', unit: 'U/L', normalRange: '7 – 56', flag: '' },
               { name: 'AST (SGOT)', value: '', unit: 'U/L', normalRange: '10 – 40', flag: '' },
-              { name: 'Alkaline Phosphatase', value: '', unit: 'U/L', normalRange: '44 – 147', flag: '' },
-              { name: 'Total Bilirubin', value: '', unit: 'mg/dL', normalRange: '0.2 – 1.2', flag: '' },
-              { name: 'Direct Bilirubin', value: '', unit: 'mg/dL', normalRange: '0.0 – 0.3', flag: '' },
-              { name: 'Total Protein', value: '', unit: 'g/dL', normalRange: '6.0 – 8.3', flag: '' },
+              {
+                name: 'Alkaline Phosphatase',
+                value: '',
+                unit: 'U/L',
+                normalRange: '44 – 147',
+                flag: '',
+              },
+              {
+                name: 'Total Bilirubin',
+                value: '',
+                unit: 'mg/dL',
+                normalRange: '0.2 – 1.2',
+                flag: '',
+              },
+              {
+                name: 'Direct Bilirubin',
+                value: '',
+                unit: 'mg/dL',
+                normalRange: '0.0 – 0.3',
+                flag: '',
+              },
+              {
+                name: 'Total Protein',
+                value: '',
+                unit: 'g/dL',
+                normalRange: '6.0 – 8.3',
+                flag: '',
+              },
               { name: 'Albumin', value: '', unit: 'g/dL', normalRange: '3.5 – 5.0', flag: '' },
             ],
           },
@@ -268,7 +364,13 @@ export class PatientService {
               { name: 'Color', value: '', unit: '', normalRange: 'Yellow', flag: '' },
               { name: 'Clarity', value: '', unit: '', normalRange: 'Clear', flag: '' },
               { name: 'pH', value: '', unit: '', normalRange: '4.5 – 8.0', flag: '' },
-              { name: 'Specific Gravity', value: '', unit: '', normalRange: '1.001 – 1.035', flag: '' },
+              {
+                name: 'Specific Gravity',
+                value: '',
+                unit: '',
+                normalRange: '1.001 – 1.035',
+                flag: '',
+              },
               { name: 'Protein', value: '', unit: '', normalRange: 'Negative', flag: '' },
               { name: 'Glucose', value: '', unit: '', normalRange: 'Negative', flag: '' },
               { name: 'Ketones', value: '', unit: '', normalRange: 'Negative', flag: '' },

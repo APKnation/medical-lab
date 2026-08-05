@@ -1,37 +1,62 @@
-<div class="min-h-screen bg-[#181818] flex items-center justify-center p-4 relative overflow-hidden text-white">
+<div
+  class="min-h-screen bg-[#181818] flex items-center justify-center p-4 relative overflow-hidden text-white"
+>
   <!-- Ambient Rosso Corsa Glow -->
-  <div class="absolute -top-32 -left-32 w-96 h-96 bg-[#da291c]/15 rounded-full blur-[140px] pointer-events-none"></div>
+  <div
+    class="absolute -top-32 -left-32 w-96 h-96 bg-[#da291c]/15 rounded-full blur-[140px] pointer-events-none"
+  ></div>
 
   <div class="w-full max-w-md bg-[#303030] border border-[#404040] p-8 space-y-8 relative z-10">
     <!-- Brand Header -->
     <div class="text-center space-y-2">
-      <div class="w-12 h-12 bg-[#da291c] mx-auto flex items-center justify-center font-black text-white text-xl tracking-tighter mb-4">
+      <div
+        class="w-12 h-12 bg-[#da291c] mx-auto flex items-center justify-center font-black text-white text-xl tracking-tighter mb-4"
+      >
         LC
       </div>
       <h1 class="text-2xl font-bold text-white uppercase tracking-tight">Staff Authentication</h1>
-      <p class="text-xs text-[#969696] tracking-wider uppercase">LifeCare Medical Laboratory Information System</p>
+      <p class="text-xs text-[#969696] tracking-wider uppercase">
+        LifeCare Medical Laboratory Information System
+      </p>
     </div>
 
     @if (error()) {
-    <div class="p-3 bg-[#da291c] text-white text-xs font-bold uppercase tracking-wider text-center">
-      {{ error() }}
-    </div>
+      <div
+        class="p-3 bg-[#da291c] text-white text-xs font-bold uppercase tracking-wider text-center"
+      >
+        {{ error() }}
+      </div>
     }
 
     <form (ngSubmit)="onSubmit()" class="space-y-6">
       <div>
         <label class="form-label">Username</label>
-        <input type="text" [(ngModel)]="username" name="username" placeholder="e.g. admin or labtech" required
-          class="form-input-ferrari" />
+        <input
+          type="text"
+          [(ngModel)]="username"
+          name="username"
+          placeholder="e.g. admin or labtech"
+          required
+          class="form-input-ferrari"
+        />
       </div>
 
       <div>
         <label class="form-label">Password</label>
         <div class="relative">
-          <input [type]="showPassword() ? 'text' : 'password'" [(ngModel)]="password" name="password" required
-            placeholder="Enter account password" class="form-input-ferrari pr-10" />
-          <button type="button" (click)="togglePassword()"
-            class="absolute right-3 top-3.5 text-[#969696] hover:text-white text-xs font-bold uppercase">
+          <input
+            [type]="showPassword() ? 'text' : 'password'"
+            [(ngModel)]="password"
+            name="password"
+            required
+            placeholder="Enter account password"
+            class="form-input-ferrari pr-10"
+          />
+          <button
+            type="button"
+            (click)="togglePassword()"
+            class="absolute right-3 top-3.5 text-[#969696] hover:text-white text-xs font-bold uppercase"
+          >
             {{ showPassword() ? 'HIDE' : 'SHOW' }}
           </button>
         </div>
@@ -41,6 +66,5 @@
         {{ loading() ? 'AUTHENTICATING...' : 'SIGN IN TO PORTAL' }}
       </button>
     </form>
-
   </div>
 </div>
