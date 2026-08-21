@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, inject, signal, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PatientService } from '../../services/patient.service';
@@ -22,18 +22,18 @@ export class TestResultsComponent implements OnInit {
   patient = signal<Patient | null>(null);
   saving = signal(false);
   activeTestId = signal<string | null>(null);
+  loading = signal(true);
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     const id = this.route.snapshot.paramMap.get('id');
     if (!id) { this.router.navigate(['/patients']); return; }
-    const p = this.patientSvc.getById(id);
+    const p = await this.patientSvc.getById(id);
     if (!p) { this.router.navigate(['/patients']); return; }
-    // Deep copy so we can edit locally
     this.patient.set(JSON.parse(JSON.stringify(p)));
-    // Set first non-completed test as active
     const first = p.tests.find((t) => t.status !== 'Completed');
     if (first) this.activeTestId.set(first.id);
     else if (p.tests.length > 0) this.activeTestId.set(p.tests[0].id);
+    this.loading.set(false);
   }
 
   get activeTest(): PatientTest | null {
@@ -48,7 +48,7 @@ export class TestResultsComponent implements OnInit {
     param.flag = this.labTestSvc.calculateFlag(param.value, param.normalRange);
   }
 
-  markTestComplete(test: PatientTest): void {
+  async markTestComplete(test: PatientTest): Promise<void> {
     const staff = this.auth.currentStaff();
     test.status = 'Completed';
     test.completedAt = new Date().toISOString();
@@ -82,20 +82,22 @@ export class TestResultsComponent implements OnInit {
     );
   }
 
-  saveResults(): void {
+  async saveResults(): Promise<void> {
     const p = this.patient();
     if (!p) return;
     this.saving.set(true);
-    setTimeout(() => {
-      const updated = this.patientSvc.recalculateStatus(p);
-      this.patientSvc.update(updated);
-      this.saving.set(false);
+    try {
+      const updated = this.patientSvc.recalculateStatusLocal(p);
+      this.patient.set(updated);
+      await this.patientSvc.update(updated);
       if (updated.status === 'Completed') {
         this.router.navigate(['/patients', updated.id, 'report']);
       } else {
         this.router.navigate(['/patients']);
       }
-    }, 700);
+    } finally {
+      this.saving.set(false);
+    }
   }
 
   formatDate(d?: string): string {

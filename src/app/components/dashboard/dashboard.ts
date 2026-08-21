@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PatientService } from '../../services/patient.service';
 import { AuthService } from '../../services/auth.service';
@@ -9,17 +9,21 @@ import { AuthService } from '../../services/auth.service';
   imports: [RouterLink],
   templateUrl: './dashboard.html',
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   private patientSvc: PatientService = inject(PatientService);
   private auth: AuthService = inject(AuthService);
 
   readonly staff = this.auth.currentStaff;
   readonly stats = computed(() => this.patientSvc.getStats());
   readonly recentPatients = computed(() =>
-    [...this.patientSvc.getAll()]
+    [...this.patientSvc.patients()]
       .sort((a, b) => new Date(b.dateRegistered).getTime() - new Date(a.dateRegistered).getTime())
       .slice(0, 8)
   );
+
+  async ngOnInit(): Promise<void> {
+    await this.patientSvc.loadFromApi();
+  }
 
   getStatusClass(status: string): string {
     return {

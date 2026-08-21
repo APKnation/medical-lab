@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PatientService } from '../../services/patient.service';
@@ -11,7 +11,7 @@ import { Patient } from '../../models/patient.model';
   imports: [RouterLink, FormsModule],
   templateUrl: './patient-list.html',
 })
-export class PatientListComponent {
+export class PatientListComponent implements OnInit {
   private patientSvc: PatientService = inject(PatientService);
   private auth: AuthService = inject(AuthService);
 
@@ -20,12 +20,14 @@ export class PatientListComponent {
   searchQuery = signal('');
   statusFilter = signal('All');
   priorityFilter = signal('All');
+  loading = signal(true);
 
   readonly filtered = computed(() => {
     const q = this.searchQuery().toLowerCase();
     const sf = this.statusFilter();
     const pf = this.priorityFilter();
-    return this.patientSvc.getAll().filter((p) => {
+    const patients = this.patientSvc.patients();
+    return patients.filter((p) => {
       const matchSearch =
         !q ||
         p.name.toLowerCase().includes(q) ||
@@ -38,13 +40,18 @@ export class PatientListComponent {
     });
   });
 
+  async ngOnInit(): Promise<void> {
+    await this.patientSvc.loadFromApi();
+    this.loading.set(false);
+  }
+
   onSearch(event: Event) {
     this.searchQuery.set((event.target as HTMLInputElement).value);
   }
 
-  deletePatient(id: string, name: string) {
+  async deletePatient(id: string, name: string) {
     if (confirm(`Are you sure you want to delete patient record for "${name}"? This cannot be undone.`)) {
-      this.patientSvc.delete(id);
+      await this.patientSvc.delete(id);
     }
   }
 

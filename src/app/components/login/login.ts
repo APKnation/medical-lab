@@ -30,21 +30,24 @@ export class LoginComponent {
     this.showPassword.update((v) => !v);
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (!this.username.trim() || !this.password.trim()) {
       this.error.set('Please enter both username and password.');
       return;
     }
     this.loading.set(true);
     this.error.set('');
-    setTimeout(() => {
-      const success = this.auth.login(this.username.trim(), this.password.trim());
-      this.loading.set(false);
+    try {
+      const success = await this.auth.login(this.username.trim(), this.password.trim());
       if (success) {
         this.router.navigate(['/dashboard']);
       } else {
         this.error.set('Invalid username or password. Please try again.');
       }
-    }, 800);
+    } catch {
+      this.error.set('An error occurred. Please try again.');
+    } finally {
+      this.loading.set(false);
+    }
   }
 }

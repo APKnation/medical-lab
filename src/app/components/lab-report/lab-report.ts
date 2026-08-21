@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, inject, signal, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PatientService } from '../../services/patient.service';
 import { Patient, PatientTest, TestResultParameter } from '../../models/patient.model';
@@ -16,10 +16,10 @@ export class LabReportComponent implements OnInit {
 
   patient = signal<Patient | null>(null);
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     const id = this.route.snapshot.paramMap.get('id');
     if (!id) { this.router.navigate(['/patients']); return; }
-    const p = this.patientSvc.getById(id);
+    const p = await this.patientSvc.getById(id);
     if (!p) { this.router.navigate(['/patients']); return; }
     this.patient.set(p);
   }

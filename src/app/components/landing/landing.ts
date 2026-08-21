@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, signal, computed, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { LabTestService } from '../../services/lab-test.service';
@@ -11,7 +11,7 @@ import { LabTest } from '../../models/lab-test.model';
   imports: [RouterLink, FormsModule],
   templateUrl: './landing.html',
 })
-export class LandingComponent {
+export class LandingComponent implements OnInit {
   private labTestSvc: LabTestService = inject(LabTestService);
   private auth: AuthService = inject(AuthService);
 
@@ -20,6 +20,8 @@ export class LandingComponent {
   searchQuery = signal('');
   selectedCategory = signal('All');
   selectedTestModal = signal<LabTest | null>(null);
+
+  allTests: LabTest[] = [];
 
   categories = [
     'All',
@@ -31,7 +33,9 @@ export class LandingComponent {
     'Parasitology',
   ];
 
-  allTests = this.labTestSvc.getAll();
+  async ngOnInit(): Promise<void> {
+    this.allTests = await this.labTestSvc.getAll();
+  }
 
   get filteredTests(): LabTest[] {
     const q = this.searchQuery().toLowerCase().trim();
