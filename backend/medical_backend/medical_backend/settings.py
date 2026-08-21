@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django_filters',
     'backend',
 ]
-
+AUTH_USER_MODEL = 'backend.Staff'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
