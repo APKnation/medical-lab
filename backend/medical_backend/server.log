@@ -1,0 +1,4 @@
+Watching for file changes with StatReloader
+/home/egovridc/APKnation/Projects/medical-lab/backend/medical_backend/venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:1712: RuntimeWarning: DateTimeField MedicalSession.expires_at received a naive datetime (2026-08-22 21:21:42.854104) while time zone support is active.
+  warnings.warn(
+[21/Aug/2026 21:21:43] "POST /api/auth/login/ HTTP/1.1" 200 887
